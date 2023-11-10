@@ -18,11 +18,12 @@ jobs:
         with:
           fetch-depth: 0
       - name: Compile LaTeX document
+        id: compileLaTeXdocument
         uses: xu-cheng/latex-action@v3
         with:
           root_file: |
             ${{ env.PAPER }}.tex
-          working_directory: .
+          working_directory: paper
           extra_system_packages: "git patch"
           latexmk_shell_escape: true
           pre_compile: git config --global --add safe.directory /github/workspace
@@ -30,9 +31,18 @@ jobs:
           TEXINPUTS: ".:$PWD/../latex-styles-master/styles//:"
           BSTINPUTS: ".:$PWD/../latex-styles-master/styles/common"
           BIBINPUTS: ".:$PWD/../latex-styles-master/share"
+        continue-on-error: true
       - name: Upload PDF
+        if: steps.compileLaTeXdocument.outcome == 'success'
         uses: actions/upload-artifact@v3
         with:
-          name: PDF
+          name: Success--Here-is-the-PDF
           path: |
-            ${{ env.PAPER }}.pdf
+            paper/${{ env.PAPER }}.pdf
+      - name: Upload build logs
+        if: steps.compileLaTeXdocument.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build-Failed--Here-are-the-Logs
+          path: |
+            paper/**/*.log

@@ -19,11 +19,12 @@ jobs:
         with:
           fetch-depth: 0
       - name: Compile LaTeX diff
+        id: compileLaTeXdiff
         uses: xu-cheng/latex-action@v3
         with:
           root_file: |
             ${{ env.PAPER }}-diff${{ env.MAIN }}.tex
-          working_directory: .
+          working_directory: paper
           extra_system_packages: "git patch"
           latexmk_shell_escape: true
           pre_compile: git config --global --add safe.directory /github/workspace && latexdiff-vc --git --flatten --disable-auto-mbox --exclude-safecmd="Cref,Cref\*,hspace" -r ${{ env.MAIN }} ${{ env.PAPER }}.tex
@@ -31,9 +32,18 @@ jobs:
           TEXINPUTS: ".:$PWD/../latex-styles-master/styles//:"
           BSTINPUTS: ".:$PWD/../latex-styles-master/styles/common"
           BIBINPUTS: ".:$PWD/../latex-styles-master/share"
+        continue-on-error: true
       - name: Upload PDF
-        uses: actions/upload-artifact@v2
+        if: steps.compileLaTeXdiff.outcome == 'success'
+        uses: actions/upload-artifact@v3
         with:
-          name: DiffPDF
+          name: Success--Here-is-the-Diff-PDF
           path: |
-            ${{ env.PAPER }}-diff${{ env.MAIN }}.pdf
+            paper/${{ env.PAPER }}-diff${{ env.MAIN }}.pdf
+      - name: Upload build logs
+        if: steps.compileLaTeXdiff.outcome == 'failure'
+        uses: actions/upload-artifact@v3
+        with:
+          name: Diff-Build-Failed--Here-are-the-Logs
+          path: |
+            paper/**/*.log
