@@ -1,0 +1,327 @@
+\usepackage{gitinfo}
+
+%
+% To-do notes.
+%
+\usepackage[textwidth=.8\marginparwidth,
+  backgroundcolor=lightgray,
+  linecolor=gray,
+  textsize=scriptsize,
+  colorinlistoftodos]{todonotes}
+%
+\newcommand{\smarttodo}[2][]{%
+  \todo[caption={\protect\hypertarget{todo}{} #2}, #1]{\hyperlink{todo}{#2}
+}}
+
+\makeatletter
+%
+% Tech report number to go at top of first page.
+%
+\def\cahierline{\gdef\@cahierline}
+\cahierline{\textcolor{gray}{Cahier du GERAD G-\number\year-\cahiernumber}}
+%
+% Git info line.
+%
+\def\gitline{\gdef\@gitline}
+\gitline{\textcolor{gray}{Commit \gitAbbrevHash\ by \gitAuthorName\ on \gitAuthorIsoDate}}
+%
+% Headings.
+%
+\def\ps@mytitlepage{\let\@mkboth\@gobbletwo
+  \def\@oddfoot{\normalfont\scriptsize\ttfamily\hfil\@gitline}
+  \def\@evenfoot{\normalfont\scriptsize\ttfamily\@gitline\hfil}
+  \def\@evenhead{\normalfont\small\rlap{\@cahierline}%\hspace{\headlineindent}
+  \hfil}
+  \def\@oddhead{\normalfont\small\hfil%\hspace{\headlineindent}
+  \llap{\@cahierline}}
+  % \def\chaptermark##1{}%
+  % \def\sectionmark##1{}%
+  % \def\subsectionmark##1{}%
+}
+
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+  \def\@oddfoot{\normalfont\scriptsize\ttfamily\@cahierline\hfil\@gitline}
+  \def\@evenfoot{\normalfont\scriptsize\ttfamily\@gitline\hfil\@cahierline}
+  \def\@evenhead{\normalfont\small\rlap{\thepage}%\hspace{\headlineindent}%
+  % \leftmark\hfil\scshape\hyperlink{contents}{[toc]}
+  }
+  \def\@oddhead{\normalfont\small\scshape%\hyperlink{contents}{[toc]}
+  \hfil\rightmark%\hspace{\headlineindent}
+  \llap{\thepage}}
+  % \def\chaptermark##1{}%
+  % \def\sectionmark##1{}%
+  % \def\subsectionmark##1{}%
+}
+\makeatother
+
+% For the Cahier du GERAD.
+%\renewcommand{\year}{2020}     % If you don't want the current year.
+\newcommand{\cahiernumber}{00}  % Insert your Cahier du GERAD number.
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsthm}  % must come before newpxtext and newpxmath
+\usepackage{amssymb}
+\renewcommand{\rmdefault}{pplx}
+\usepackage{eulervm} % Euler math
+
+\usepackage{amsmath}
+\usepackage{thmtools}
+\usepackage[final]{microtype} % Less badboxes
+\usepackage{xspace}
+\usepackage{subdepth}  % Equalize depth of subscripts. Amazing!
+
+\usepackage{graphicx}
+\graphicspath{{figs/}}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{tikzscale}
+\usetikzlibrary{external}
+\tikzexternalize[optimize=false,prefix=./figs/]  % must compile with -shell-escape !
+
+% tikz-generated PDFs should have the same name as the source tikz file
+\newcommand*{\includetikzgraphics}[2][]{%
+  \tikzsetnextfilename{#2}%
+  \includegraphics[#1]{#2.tikz}
+}
+
+% compile TikZ figures with LuaLaTeX to avoid running out of memory
+\tikzset{external/system call={lualatex \tikzexternalcheckshellescape
+      -halt-on-error
+      -interaction=batchmode
+      -jobname "\image" "\texsource"}}
+
+% uncomment the following to simply include the generated PDFs
+% \newcommand*{\includetikzgraphics}[2][]{%
+% 	\includegraphics[#1]{#2}
+% }
+
+% prevent TODO notes from being exported by \tikzexternalize
+% and weird effects to happen as a consequence
+% https://tex.stackexchange.com/questions/42486/todonotes-and-tikzexternalize
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\makeatother
+
+\usepackage{pgfplots}
+% Moves axis labels near ticklabels (respects tick label widths).
+\pgfplotsset{compat=newest}
+\pgfplotsset{
+  tick label style={font=\scriptsize},
+  title style={font=\scriptsize},
+  label style={font=\scriptsize},
+  legend style={font=\scriptsize},
+  scaled x ticks = false,
+  scaled y ticks = false,
+  height = {50mm},
+  width = {50mm},
+  xticklabel style = {font=\scriptsize},
+  yticklabel style = {font=\scriptsize},
+  table/search path={figs},  % location of dat files for TikZ figures
+}
+
+\usepackage{algorithmicx}
+\usepackage[section]{algorithm}
+\usepackage[noend]{algpseudocode}
+\renewcommand{\algorithmiccomment}[1]{\hfill\textcolor{gray}{\textit{#1}}}
+
+% \usepackage[theme=grayscale,charsperline=90]{jlcode}
+
+\usepackage{xurl}
+\usepackage[pdfpagelabels]{hyperref}   % Internal hyperlinks
+\hypersetup{
+  colorlinks,
+  linkcolor={blue!70!black},
+  urlcolor={red!50!black},
+  citecolor={green!50!black},
+  pdfborder={0 0 0},      % No borders around internal hyperlinks
+}
+\usepackage[nameinlink]{cleveref}
+
+\declaretheorem[name=Theorem]{theorem}
+\declaretheorem[name=Lemma]{lemma}
+\declaretheorem[name=Proposition]{proposition}
+\declaretheorem[name=Corollary]{corollary}
+
+\declaretheorem[name=Definition]{definition}
+\declaretheorem[name=Assumption]{assumption}
+\declaretheorem[name=Example]{example}
+\declaretheorem[name=Exercise]{exercise}
+
+\declaretheorem[name=Remark]{remark}
+
+\makeatletter
+\def\dedicatory#1{\def\@dedicatory{#1}}
+\let\@dedicatory=\@empty
+\def\@maketitle{%
+  \newpage
+  \vspace*{-\topskip}      % remove the initial space
+  \begingroup\centering    % instead of \begin{center}
+  \let\footnote\thanks
+  \hrule height \z@        % to avoid the insertion of lineskip glue
+    {\LARGE \@title \par}%
+    \vskip 1.5em
+    {\large
+      \lineskip .5em
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+    \vskip 1em
+    \@date%
+  \par\endgroup            % instead of \end{center}
+    \ifx\@empty\@dedicatory
+  \else
+    \baselineskip26\p@
+    \vtop{\centering{\footnotesize\itshape\@dedicatory\@@par}%
+      \global\dimen@i\prevdepth}\prevdepth\dimen@i
+  \fi
+  \vskip 1.5em             % <--- modify this to adjust the separation
+}
+\makeatother
+
+%
+% Bibliography style.
+%
+\usepackage[numbers,sort&compress]{natbib}
+% \bibhang only works for author-year style
+% this patch sets the indent after the first line to \bibindent in number style
+\setlength{\bibsep}{0pt}
+\setlength{\bibindent}{0pt}
+\makeatletter
+\renewcommand\NAT@bibsetnum[1]{\settowidth\labelwidth{\@biblabel{#1}}%
+   \setlength{\leftmargin}{\bibindent}\addtolength{\leftmargin}{\dimexpr\labelwidth+\labelsep\relax}%
+   \setlength{\itemindent}{-\bibindent}%
+   \setlength{\listparindent}{\itemindent}
+\setlength{\itemsep}{\bibsep}\setlength{\parsep}{\z@}%
+   \ifNAT@openbib
+     \addtolength{\leftmargin}{\bibindent}%
+     \setlength{\itemindent}{-\bibindent}%
+     \setlength{\listparindent}{\itemindent}%
+     \setlength{\parsep}{0pt}%
+   \fi
+}
+\makeatother
+
+% patch natbib to hyperlink author names when using the number style
+% https://tex.stackexchange.com/questions/76067/how-to-hyperlink-name-part-in-citet-using-natbib-numerical-and-hyperref
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\NAT@test}{\else \NAT@nm}{\else \NAT@hyper@{\NAT@nm}}{}{}
+\makeatother
+%
+% Hyperlink DOIs and URLs in the bibliography.
+%
+\newcommand*{\doi}[1]{DOI\@: \href{http://dx.doi.org/\detokenize{#1}}{\detokenize{#1}}}
+\newcommand*{\doilink}[2]{\href{http://dx.doi.org/\detokenize{#1}}{#2}}
+%
+% Double-stroke symbols for number sets.
+%
+\usepackage{dsfont}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\N}{\mathds{N}}
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\C}{\mathds{C}}
+\newcommand{\B}{\mathds{B}}
+
+\newcommand{\minim}{\mathop{\textup{minimize}}}
+\newcommand{\minimize}[1]{\minim_{#1}}
+\newcommand{\st}{\textup{subject to}}
+\newcommand{\argminim}{\mathop{\textup{argmin}}}
+\newcommand{\argmin}[1]{\argminim_{#1}}
+\newcommand{\argmaxim}{\mathop{\textup{argmax}}}
+\newcommand{\argmax}[1]{\argmaxim_{#1}}
+\newcommand{\supp}{\mathop{\textup{supp}}}
+\newcommand{\proj}{\mathop{\textup{proj}}}
+\newcommand{\prox}{\mathop{\textup{prox}}}
+\newcommand{\iprox}{\mathop{\textup{iprox}}}
+\newcommand{\interior}{\mathop{\textup{int}}}
+\newcommand{\trace}{\mathop{\textup{trace}}}
+\newcommand{\epi}{\mathop{\textup{epi}}}
+\renewcommand{\vec}{\mathop{\textup{vec}}}
+
+\newcommand{\diag}{\mathop{\text{diag}}}
+
+% an implementation of \widebar that does not require mathabx
+% https://tex.stackexchange.com/questions/16337/can-i-get-a-widebar-without-using-the-mathabx-package
+\makeatletter
+\let\save@mathaccent\mathaccent
+\newcommand*\if@single[3]{%
+  \setbox0\hbox{${\mathaccent"0362{#1}}^H$}%
+  \setbox2\hbox{${\mathaccent"0362{\kern0pt#1}}^H$}%
+  \ifdim\ht0=\ht2 #3\else #2\fi
+  }
+%The bar will be moved to the right by a half of \macc@kerna, which is computed by amsmath:
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+%If there's a superscript following the bar, then no negative kern may follow the bar;
+%an additional {} makes sure that the superscript is high enough in this case:
+\newcommand*\widebar[1]{\@ifnextchar^{{\wide@bar{#1}{0}}}{\wide@bar{#1}{1}}}
+%Use a separate algorithm for single symbols:
+\newcommand*\wide@bar[2]{\if@single{#1}{\wide@bar@{#1}{#2}{1}}{\wide@bar@{#1}{#2}{2}}}
+\newcommand*\wide@bar@[3]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+%Enable nesting of accents:
+    \let\mathaccent\save@mathaccent
+%If there's more than a single symbol, use the first character instead (see below):
+    \if#32 \let\macc@nucleus\first@char \fi
+%Determine the italic correction:
+    \setbox\z@\hbox{$\macc@style{\macc@nucleus}_{}$}%
+    \setbox\tw@\hbox{$\macc@style{\macc@nucleus}{}_{}$}%
+    \dimen@\wd\tw@
+    \advance\dimen@-\wd\z@
+%Now \dimen@ is the italic correction of the symbol.
+    \divide\dimen@ 3
+    \@tempdima\wd\tw@
+    \advance\@tempdima-\scriptspace
+%Now \@tempdima is the width of the symbol.
+    \divide\@tempdima 10
+    \advance\dimen@-\@tempdima
+%Now \dimen@ = (italic correction / 3) - (Breite / 10)
+    \ifdim\dimen@>\z@ \dimen@0pt\fi
+%The bar will be shortened in the case \dimen@<0 !
+    \rel@kern{0.6}\kern-\dimen@
+    \if#31
+      \overline{\rel@kern{-0.6}\kern\dimen@\macc@nucleus\rel@kern{0.4}\kern\dimen@}%
+      \advance\dimen@0.4\dimexpr\macc@kerna
+%Place the combined final kern (-\dimen@) if it is >0 or if a superscript follows:
+      \let\final@kern#2%
+      \ifdim\dimen@<\z@ \let\final@kern1\fi
+      \if\final@kern1 \kern-\dimen@\fi
+    \else
+      \overline{\rel@kern{-0.6}\kern\dimen@#1}%
+    \fi
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+%The following initialises \macc@kerna and calls \mathaccent:
+  \if#31
+    \macc@nested@a\relax111{#1}%
+  \else
+%If the argument consists of more than one symbol, and if the first token is
+%a letter, use that letter for the computations:
+    \def\gobble@till@marker##1\endmarker{}%
+    \futurelet\first@char\gobble@till@marker#1\endmarker
+    \ifcat\noexpand\first@char A\else
+      \def\first@char{}%
+    \fi
+    \macc@nested@a\relax111{\first@char}%
+  \fi
+  \endgroup
+}
+\makeatother
+
+\newtheorem{problemassumption}{Problem Assumption}[section]
+\newtheorem{modelassumption}{Model Assumption}[section]
+\newtheorem{stepassumption}{Step Assumption}[section]
+
+\crefname{problemassumption}{Problem Assumption}{Problem Assumptions}
+\Crefname{problemassumption}{Problem Assumption}{Problem Assumptions}
+\crefname{modelassumption}{Model Assumption}{Model Assumptions}
+\Crefname{modelassumption}{Model Assumption}{Model Assumptions}
+\crefname{stepassumption}{Step Assumption}{Step Assumptions}
+\Crefname{stepassumption}{Step Assumption}{Step Assumptions}

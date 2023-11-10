@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+\usepackage{defs}
+
+\newcommand{\papertitle}{%
+  Insert Your Title Here
+}
+
+% For debugging.
+%\usepackage{showframe}
+
+% Meta-information for the PDF file generated..
+\hypersetup{
+  pdftitle={\papertitle},
+  pdfauthor={Author One and Author Two},
+  pdfsubject={Report Subject},
+  pdfkeywords={Keyword1, keyword2, keyword3},
+}
+
+% \usepackage{newunicodechar}
+% \newunicodechar{Δ}{\ensuremath{\Delta}}
+
+\title{\papertitle}
+\author{%
+  Author One\footnote{%
+    GERAD and Department of Mathematics and Industrial Engineering, Polytechnique Montr\'eal. E-mail: \href{mailto:geoffroy.leconte@polymtl.ca}{geoffroy.leconte@polymtl.ca}.
+  }
+  \and
+  Dominique Orban\footnote{%
+    GERAD and Department of Mathematics and Industrial Engineering, Polytechnique Montr\'eal. E-mail: \href{mailto:dominique.orban@gerad.ca}{dominique.orban@gerad.ca}.
+  }
+  \thanks{Research supported by an NSERC Discovery grant.}
+}
+
+% \dedicatory{Add a dedication if appropriate.}
+
+\begin{document}
+\maketitle
+\thispagestyle{mytitlepage}
+
+\begin{abstract}
+\end{abstract}
+
+% Résumé en français pour le Cahier du GERAD
+% \begin{resume}
+% \end{resume}
+
+\pagestyle{myheadings}
+
+\section{Introduction}%
+\label{sec:introduction}
+
+
+\subsection*{Related research}
+
+
+\subsection*{Notation}
+
+
+\section{Background}%
+\label{sec:background}
+
+
+\section{Another Section}%
+\label{sec:another-section}
+
+
+\section{Implementation and numerical experiments}%
+\label{sec:numerical}
+
+
+\section{Discussion and future work}%
+\label{sec:discussion}
+
+
+\small
+\subsection*{Acknowledgements}
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{abbrv,report}
+\normalsize
+
+\end{document}
