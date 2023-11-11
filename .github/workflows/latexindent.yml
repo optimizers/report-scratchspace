@@ -20,7 +20,7 @@ jobs:
         shopt -s nullglob  # allow empty loops below
         cd paper
         for f in *.tex; do latexindent -l ./localSettings.yaml -m -r -w $f; done
-        for f in *.bib; do latexindent -l ./localSettings.yaml -m -r -w $f; done
+        # for f in *.bib; do latexindent -l ./localSettings.yaml -m -r -w $f; done
         rm *.bak[0-9]
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
