@@ -47,3 +47,6 @@ jobs:
           name: Diff-Build-Failed--Here-are-the-Logs
           path: |
             paper/**/*.log
+      - name: Fail job if build failed
+        if: steps.compileLaTeXdiff.outcome == 'failure'
+        run: exit 1
