@@ -33,14 +33,14 @@ jobs:
           BIBINPUTS: ".:$PWD/../latex-styles-master/share"
         continue-on-error: true
       - name: Upload PDF
-        if: steps.compileLaTeXdocument.outcome == 'success'
+        if: steps.compileLaTeXdocument.outcome == 'success' && needs.pr-check.outputs.number != null
         uses: actions/upload-artifact@v3
         with:
           name: Success--Here-is-the-PDF
           path: |
             paper/${{ env.PAPER }}.pdf
       - name: Upload build logs
-        if: steps.compileLaTeXdocument.outcome == 'failure'
+        if: steps.compileLaTeXdocument.outcome == 'failure' && needs.pr-check.outputs.number != null
         uses: actions/upload-artifact@v3
         with:
           name: Build-Failed--Here-are-the-Logs
@@ -49,3 +49,10 @@ jobs:
       - name: Fail job if build failed
         if: steps.compileLaTeXdocument.outcome == 'failure'
         run: exit 1
+      - name: Create release
+        if: ${{ github.event_name == 'push' }}
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: false
+          prerelease: false
+          files: paper/${{ env.PAPER }}.pdf
