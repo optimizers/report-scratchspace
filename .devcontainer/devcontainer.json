@@ -5,7 +5,7 @@
 			"channel": "release"
 		},
 		"ghcr.io/prulloac/devcontainer-features/latex:1": {
-			"scheme": "basic",
+			"scheme": "minimal",
 			"packages": "texlive-fonts-extra",
 		}
 	}
