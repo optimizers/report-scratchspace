@@ -3,7 +3,7 @@
     "image": "ghcr.io/willfantom/devcontainer-latex:latest-basic",
     "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached",
     "workspaceFolder": "/workspace",
-    "postCreateCommand": "tlmgr install appendix lipsum logreq svg transparent trimspaces algorithms algorithmicx cleveref doublestroke eulervm gitinfo pgfplots subdepth todonotes thmtools tikzscale xstring xurl palatino mathpazo fpl && texhash",
+    "postCreateCommand": "tlmgr update --self && tlmgr install appendix lipsum logreq svg transparent trimspaces algorithms algorithmicx cleveref doublestroke eulervm gitinfo pgfplots subdepth todonotes thmtools tikzscale xstring xurl palatino mathpazo fpl && texhash",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -65,7 +65,7 @@
                 "ltex.additionalRules.motherTongue": "fr",
                 "ltex.checkFrequency": "save",
                 "ltex.completionEnabled": true,
-               "ltex.additionalRules.enablePickyRules": true,
+                "ltex.additionalRules.enablePickyRules": true,
                 "languageTool.language": "en",
                 "languageTool.enabled": true
             }
