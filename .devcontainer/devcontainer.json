@@ -1,6 +1,6 @@
 {
     "name": "latex-dev",
-    "image": "ghcr.io/willfantom/devcontainer-latex:latest-small",
+    "image": "ghcr.io/willfantom/devcontainer-latex:latest-basic",
     "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached",
     "workspaceFolder": "/workspace",
     "postCreateCommand": "tlmgr install appendix lipsum logreq svg transparent trimspaces algorithms algorithmicx cleveref doublestroke eulervmtlmgr gitinfo pgfplots subdepth todonotes thmtools tikzscale xstring xurl palatino mathpazo fpl && texhash",
@@ -27,7 +27,7 @@
                 "james-yu.latex-workshop",
                 "simonsiefke.svg-preview",
                 // Copilot
-                "gitHub.copilot"
+                // "gitHub.copilot"
             ],
             "settings": {
                 // General Settings
