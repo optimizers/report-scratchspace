@@ -1,0 +1,28 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/prulloac/devcontainer-features/latex:1": {
+      "scheme": "minimal",
+      "packages": [
+        "algorithms",
+        "algorithmicx",
+        "cleveref",
+        "doublestroke",
+        "eulervm",
+        "float",
+        "fpl",
+        "gitinfo",
+        "mathpazo",
+        "microtype",
+        "palatino",
+        "pgfplots",
+        "subdepth",
+        "todonotes",
+        "thmtools",
+        "tikzscale",
+        "xstring",
+        "xurl",
+      ],
+    }
+  }
+}
