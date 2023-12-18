@@ -43,5 +43,17 @@
         "xurl",
       ],
     }
-  }
+  },
+  "customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"editor.formatOnSave": true,
+			},
+			"extensions": [
+				"valentjn.vscode-ltex	"
+			]
+		}
+	},
 }
