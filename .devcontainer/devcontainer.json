@@ -4,6 +4,9 @@
     "ghcr.io/julialang/devcontainer-features/julia:1": {
       "channel": "release",
     },
+    "ghcr.io/devcontainers-contrib/features/perl-asdf:2": {
+      "version": "latest"
+    }
     "ghcr.io/prulloac/devcontainer-features/latex:1": {
       "scheme": "minimal",
       "packages": [
@@ -45,15 +48,15 @@
     }
   },
   "customizations": {
-		// Configure properties specific to VS Code.
-		"vscode": {
-			// Set *default* container specific settings.json values on container create.
-			"settings": {
-				"editor.formatOnSave": true,
-			},
-			"extensions": [
-				"valentjn.vscode-ltex	"
-			]
-		}
-	},
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "editor.formatOnSave": true,
+      },
+      "extensions": [
+        "valentjn.vscode-ltex"
+      ]
+    }
+  },
 }
