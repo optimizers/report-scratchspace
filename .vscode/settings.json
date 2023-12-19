@@ -1,0 +1,40 @@
+{
+    // General Settings
+    "files.eol": "\n",
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    // "rewrap.wrappingColumn": 80,
+    // Latex Settings
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.linting.chktex.enabled": true,
+    "latex-workshop.linting.chktex.exec.path": "chktex",
+    "latex-workshop.linting.lacheck.enabled": true,
+    "latex-workshop.latex.clean.subfolder.enabled": true,
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latexindent.path": "latexindent",
+    "latex-workshop.latexindent.args": [
+        "-c",
+        "%DIR%/",
+        "%TMPFILE%",
+        "-l",
+        "-m",
+        "-r",
+        "-w"
+    ],
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.wordWrap": "on",
+        "editor.fontSize": 12,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "cSpell.showAutocompleteSuggestions": true,
+        "rewrap.autoWrap.enabled": true
+    },
+    // "ltex.ltex-ls.path": "/usr/share/ltex-ls",
+    // "ltex.java.path": "/usr/lib/jvm/default-java",
+    "ltex.additionalRules.motherTongue": "fr",
+    "ltex.checkFrequency": "save",
+    "ltex.completionEnabled": true,
+    "ltex.additionalRules.enablePickyRules": true,
+    "languageTool.language": "en",
+    "languageTool.enabled": true
+}
