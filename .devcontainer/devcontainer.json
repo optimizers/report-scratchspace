@@ -4,9 +4,6 @@
     "ghcr.io/julialang/devcontainer-features/julia:1": {
       "channel": "release",
     },
-    "ghcr.io/devcontainers-contrib/features/perl-asdf:2": {
-      "version": "latest"
-    },
     "ghcr.io/prulloac/devcontainer-features/latex:1": {
       "scheme": "minimal",
       "packages": [
