@@ -44,6 +44,7 @@
       ],
     }
   },
+  "postCreateCommand": "(echo 'y' | sudo cpan) && bash -c 'sudo cpan -T YAML::Tiny File::HomeDir'",
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
