@@ -6,6 +6,7 @@
 2. Fork this repository to your GitHub account. 
 3. Clone your fork with `git clone https://github.com/<your-github-id>/report.git`.
 4. Add the original repository as a remote so you can pull updates in the future with `git remote add upstream https://github.com/dpo/report.git`.
+5. Install the git hooks with `cp .config/hooks/* .git/hooks/ && chmod +x .git/hooks/*`.
 
 ## GitHub Actions
 
