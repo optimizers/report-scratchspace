@@ -44,7 +44,7 @@
       ],
     }
   },
-  "postCreateCommand": "(echo 'y' | sudo cpan) && bash -c 'sudo cpan -T YAML::Tiny File::HomeDir'",
+  "postCreateCommand": "(echo 'y' | sudo cpan) && bash -c 'sudo cpan -T YAML::Tiny File::HomeDir' && cp .config/hooks/* .git/hooks/ && chmod +x .git/hooks/*",
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
